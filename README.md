@@ -1,34 +1,34 @@
 # Assignment-9
 Communication Contract
-- I am using the spotify web API to recieve reccomendations based on given user genre input. This will not change.
 
- To send a request:
-- Send a GET requst to the endpoint of spotify api.
-- Example call:
+## Overview
+- This microservice uses the Spotify Web API to provide recommendations based on user-provided genre input.
+- To use the microservice, users need to obtain an API key and secret ID from the Spotify Developer API site: [Spotify Developer API](https://developer.spotify.com/documentation/web-api)
 
+## Sending a Request
+To request recommendations:
+1. Send a GET request to the microservice endpoint.
+2. Include the following parameters:
+   - `Enter seed genres for recommendations (comma-separated):`: The user's preferred genre for recommendations.
+
+Example Python call using `requests`:
+```python
 import requests
 
-url = "http://microservice-url/api/data"
+url = "http://your-microservice-url/api/data"
 params = {"current_location": "your_current_location"}
 
 response = requests.get(url, params=params)
 
+if response.status_code == 200:
+    data = response.json()
+    # Handle response data here
+else:
+    print("Failed to retrieve data from the microservice:", response.status_code)
 
-Receiving Data:
+## Receiving Data
+The microservice will respond with recommendations in JSON format:
 
-HTTP Response: The microservice will send back an HTTP response in JSON format.
-Example Response:
-json
-{
-  "recommendations": [
-    {
-      "song_title": "Example Song 1",
-      "artist": "Artist 1"
-    },
-    {
-      "song_title": "Example Song 2",
-      "artist": "Artist 2"
-    },
-    ...
-  ]
-}
+## Error Handling
+- Handle non-200 status codes appropriately when receiving data from the microservice.
+- Provide feedback or error messages to users in case of failed requests.
